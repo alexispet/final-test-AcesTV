@@ -1,10 +1,10 @@
 # Notation
 
-- [ ] Vous avez un Dockerfile permettant de créer une image contenant l’application prête à l’emploi
-- [ ] Vous avez docker-compose.yml permettant de travailler sur le projet en local
-- [ ] Vous avez un script docker entrypoint qui exécute le script d’import de BDD
-- [ ] Vous avez un script docker entrypoint qui installe les dépendances seulement en dev
-- [ ] Vous faites du multi stage build pour alléger le poids final de votre image
+- [X] Vous avez un Dockerfile permettant de créer une image contenant l’application prête à l’emploi
+- [X] Vous avez docker-compose.yml permettant de travailler sur le projet en local
+- [X] Vous avez un script docker entrypoint qui exécute le script d’import de BDD
+- [X] Vous avez un script docker entrypoint qui installe les dépendances seulement en dev
+- [X] Vous faites du multi stage build pour alléger le poids final de votre image
 - [ ] Dans un workflow GitHub, vous lancez les tests
 - [ ] Dans un workflow GitHub, vous construisez et envoyez l’image docker de l’application sur un registry
 - [ ] Dans un workflow GitHub, vous lancez un audit de sécurité

@@ -6,10 +6,10 @@ let port = process.env.PORT || 3000;
 
 // Configurations de la base de données
 const pool = mariadb.createPool({
-  host: 'mariadb',
-  user: 'votre_utilisateur',
-  password: 'votre_mot_de_passe',
-  database: 'votre_base_de_donnees',
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'username',
+  password: process.env.DB_PASSWORD || 'password',
+  database: process.env.DB_DATABASE || 'bdd',
   connectionLimit: 5
 });
 
@@ -24,6 +24,7 @@ app.get('/post', async (req, res) => {
     const rows = await conn.query('SELECT * FROM posts');
     res.json(rows);
   } catch (err) {
+    console.error(conn);
     console.error(err);
     res.status(500).json({ error: 'Erreur lors de la récupération des posts' });
   } finally {
