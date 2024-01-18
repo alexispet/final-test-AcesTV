@@ -147,25 +147,25 @@ jobs:
           push: true
           tags: ghcr.io/alexispet/final-test-acestv:${{ github.ref_name }}
 
-#  deploy-production:
-#    needs: [build-docker]
-#    if: github.ref_type == 'tag'
-#    environment:
-#        name: production
-#        url: https://35.170.192.9:80
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
-#      packages: write
-#    steps:
-#      - name: Deploy to server
-#        uses: appleboy/ssh-action@master
-#        with:
-#            host: ${{ secrets.SSH_HOST }}
-#            username: ${{ secrets.SSH_USER }}
-#            key: ${{ secrets.SSH_KEY }}
-#            port: ${{ secrets.SSH_PORT }}
-#            script: cd prod && sudo docker compose -f docker-compose.prod.yml up --pull always -d
+  deploy-production:
+    needs: [build-and-push-image]
+    if: github.ref_type == 'tag'
+    environment:
+        name: production
+        url: https://18.207.227.134:80
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USER }}
+            key: ${{ secrets.SSH_KEY }}
+            port: ${{ secrets.SSH_PORT }}
+            script: cd prod && sudo docker compose -f docker-compose.prod.yml up --pull always -d
 #
 #  deploy-development:
 #    needs: [ build-docker ]
