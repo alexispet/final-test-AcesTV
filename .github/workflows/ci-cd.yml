@@ -64,13 +64,16 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - run: npm ci
-      - name: Run tests
-        run: npm run test
+      - name: Run import script
+        run: npm run import
         env:
           DB_HOST: mariadb
           DB_USER: user
           DB_PASSWORD: password
           DB_DATABASE: testdb
+
+      - name: Run tests
+        run: npm run test
 
   dependency-audit:
     runs-on: ubuntu-latest
