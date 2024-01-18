@@ -9,27 +9,26 @@ env:
 
 jobs:
 
-  lint:
+  eslint:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
-      statuses: write
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out source code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '21.5.0'
-      - name: Super-linter
-        uses: super-linter/super-linter@v5.7.2
-        env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '21.5.0' # Replace with the version of Node.js used in your project
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npx eslint .
 
 
-#  lighthouse:
+  #  lighthouse:
 #    runs-on: ubuntu-latest
 #    steps:
 #      - uses: actions/checkout@v3
