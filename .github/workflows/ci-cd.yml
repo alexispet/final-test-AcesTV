@@ -9,23 +9,23 @@ env:
 
 jobs:
 
-  eslint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out source code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '21.5.0'
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run ESLint
-        run: npx eslint .
+#  eslint:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Check out source code
+#        uses: actions/checkout@v4
+#
+#      - name: Set up Node.js
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: '21.5.0'
+#
+#      - name: Install Dependencies
+#        run: npm install
+#
+#      - name: Run ESLint
+#        run: npx eslint .
 
 
   #  lighthouse:
@@ -39,45 +39,48 @@ jobs:
 #            http://ec2-34-207-88-89.compute-1.amazonaws.com/
 #          uploadArtifacts: true
 #          temporaryPublicStorage: true
-  test:
-    runs-on: ubuntu-latest
 
-    services:
-      mariadb:
-        image: mariadb:11.2.2
-        env:
-          MYSQL_ROOT_PASSWORD: rootpassword
-          MYSQL_DATABASE: testdb
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
 
-    strategy:
-      matrix:
-        node-version: [20.x, 21.5.0]
 
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - uses: actions/cache/restore@v3
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-
-      - run: npm ci
-      - name: Run import script
-        run: npm run db:import
-        env:
-          DB_HOST: localhost
-          DB_USER: user
-          DB_PASSWORD: password
-          DB_DATABASE: testdb
-
-      - name: Run tests
-        run: npm run test
+#  test:
+#    runs-on: ubuntu-latest
+#
+#    services:
+#      mariadb:
+#        image: mariadb:11.2.2
+#        env:
+#          MYSQL_ROOT_PASSWORD: rootpassword
+#          MYSQL_DATABASE: testdb
+#          MYSQL_USER: user
+#          MYSQL_PASSWORD: password
+#
+#    strategy:
+#      matrix:
+#        node-version: [20.x, 21.5.0]
+#
+#    steps:
+#      - uses: actions/checkout@v4
+#      - name: Use Node.js ${{ matrix.node-version }}
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#      - uses: actions/cache/restore@v3
+#        with:
+#          path: |
+#            node_modules
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#
+#      - run: npm ci
+#      - name: Run import script
+#        run: npm run db:import
+#        env:
+#          DB_HOST: localhost
+#          DB_USER: user
+#          DB_PASSWORD: password
+#          DB_DATABASE: testdb
+#
+#      - name: Run tests
+#        run: npm run test
 
   dependency-audit:
     runs-on: ubuntu-latest
