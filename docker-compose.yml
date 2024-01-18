@@ -14,6 +14,7 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+    command: ["npm", "run", "start"]
 
   db:
     image: mariadb:11.2.2
@@ -22,10 +23,16 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+        - mariadb_data:/var/lib/mysql
 
   adminer:
     image: adminer
     ports:
       - 8080:8080
 
+volumes:
+    mariadb_data:
 

@@ -9,21 +9,23 @@ env:
 
 jobs:
 
-#  lint:
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
-#      packages: read
-#      statuses: write
-#    steps:
-#      - uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 0
-#      - name: Super-linter
-#        uses: super-linter/super-linter@v5.7.2
-#        env:
-#          DEFAULT_BRANCH: main
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Super-linter
+        uses: super-linter/super-linter@v5.7.2
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
 #  lighthouse:
 #    runs-on: ubuntu-latest
 #    steps:
