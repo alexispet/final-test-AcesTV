@@ -35,25 +35,24 @@ jobs:
 #            http://ec2-34-207-88-89.compute-1.amazonaws.com/
 #          uploadArtifacts: true
 #          temporaryPublicStorage: true
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '21.5.0'
-      - uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - run: npm ci
-
   test:
-    needs: [build]
-
     runs-on: ubuntu-latest
+
+    services:
+      mariadb:
+        image: mariadb:11.2.2
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: testdb
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=10s
+          --health-retries=10
 
     strategy:
       matrix:
@@ -72,7 +71,13 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - run: npm ci
-      - run: npm run test
+      - name: Run tests
+        run: npm run test
+        env:
+          DB_HOST: mariadb
+          DB_USER: user
+          DB_PASSWORD: password
+          DB_DATABASE: testdb
 
   dependency-audit:
     runs-on: ubuntu-latest
