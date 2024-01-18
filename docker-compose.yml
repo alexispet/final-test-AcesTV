@@ -16,7 +16,9 @@ services:
         condition: service_healthy
     volumes:
       - ".:/app"
-    command: ["npm", "run", "start  "]
+    env_file:
+      - ./.env
+    command: ["npm", "run", "start"]
 
   mariadb:
     image: mariadb:11.2.2
@@ -27,7 +29,7 @@ services:
       MARIADB_DATABASE: ${DB_DATABASE}
       MARIADB_RANDOM_ROOT_PASSWORD: "yes"
     volumes:
-      - "./docker/mariadb/data:/var/lib/sql"
+      - "./docker/mariadb/data:/var/lib/mysql"
     healthcheck:
       test: [ "CMD", "healthcheck.sh", "--su-mysql", "--connect" ]
       interval: 5s
