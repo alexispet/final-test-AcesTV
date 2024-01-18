@@ -8,7 +8,7 @@
 - [X] Dans un workflow GitHub, vous lancez les tests
 - [X] Dans un workflow GitHub, vous construisez et envoyez l’image docker de l’application sur un registry
 - [X] Dans un workflow GitHub, vous lancez un audit de sécurité
-- [ ] Les identifiants de connexion à la base de données sont passés en environnement
+- [X] Les identifiants de connexion à la base de données sont passés en environnement
 - [ ] Les identifiants de connexion à la base de données de prod ne sont jamais visibles dans le code versionné
 - [ ] Vous avez eslint de fonctionnel en local et sur le workflow GitHub
 - [ ] Vous avez docker-compose.prod.yml permettant de lancer l’application en mode prod

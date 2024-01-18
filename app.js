@@ -24,7 +24,6 @@ app.get('/post', async (req, res) => {
     const rows = await conn.query('SELECT * FROM posts');
     res.json(rows);
   } catch (err) {
-    console.error(conn);
     console.error(err);
     res.status(500).json({ error: 'Erreur lors de la récupération des posts' });
   } finally {
