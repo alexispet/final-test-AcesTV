@@ -67,7 +67,7 @@ jobs:
       - name: Run import script
         run: npm run db:import
         env:
-          DB_HOST: mariadb
+          DB_HOST: localhost
           DB_USER: user
           DB_PASSWORD: password
           DB_DATABASE: testdb
