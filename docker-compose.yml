@@ -4,10 +4,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DB_HOST: db
-      DB_USER: apiuser
-      DB_PASSWORD: apipassword
-      DB_DATABASE: db_api
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
       NODE_ENV: development
     depends_on:
       - db
@@ -19,9 +19,9 @@ services:
     image: mariadb:11.2.2
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: yes
-      MYSQL_DATABASE: db_api
-      MYSQL_USER: apiuser
-      MYSQL_PASSWORD: apipassword
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD
 
   adminer:
     image: adminer
