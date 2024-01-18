@@ -1,106 +1,25 @@
 {
     "env": {
-        "browser": false,
-        "es6": true,
+        "es2021": true,
         "node": true
     },
-    "parser": "@typescript-eslint/parser",
-
-    "root": true,
-
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "airbnb-base"
-    ],
-
-    "rules": {
-        "no-console": ["off"],
-
-        "comma-dangle": ["error", "always-multiline"],
-        "object-curly-newline": ["off"],
-        "linebreak-style": ["error", "unix"],
-        "indent": ["error", "tab"],
-        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
-        "no-multiple-empty-lines": ["error", {
-            "max": 1,
-            "maxBOF": 1
-        }],
-        "no-sequences": ["error"],
-        "no-tabs": ["error", {
-            "allowIndentationTabs": true
-        }],
-        "max-len": ["error", {
-            "code": 120,
-            "ignoreComments": true,
-            "ignoreRegExpLiterals": true,
-            "ignoreStrings": true,
-            "ignoreTemplateLiterals": true
-        }],
-        "quotes": ["error", "single"],
-        "semi": ["error"],
-        "spaced-comment": ["error", "always", {
-            "exceptions": ["-", "+", "=", "*", "\t"]
-        }],
-
-        "block-scoped-var": ["error"],
-        "camelcase": ["warn"],
-        "class-methods-use-this": ["warn"],
-        "eqeqeq": ["error",	"always"],
-        "handle-callback-err": ["error"],
-        "import/extensions": ["warn", {
-            "ts": "never",
-            "json": "always"
-        }],
-        "import/prefer-default-export": ["warn"],
-        "max-classes-per-file": ["warn", 2],
-        "no-extra-boolean-cast": ["off"],
-        "no-labels": ["error"],
-        "no-plusplus": ["off"],
-        "no-return-assign": ["error", "always"],
-        "no-undef": ["off"],
-        "no-unused-vars": ["off"],
-        "no-use-before-define": ["off"],
-        "no-shadow": ["off"],
-        "prefer-const": ["error"],
-
-        "@typescript-eslint/no-shadow": ["error"],
-        "@typescript-eslint/no-unused-vars": ["error", {
-            "vars": "all",
-            "varsIgnorePattern": "^_"
-        }],
-
-        "import/no-extraneous-dependencies": ["error", {
-            "devDependencies": [
-                "**/*.test.ts"
-            ]
-        }]
-    },
-
     "overrides": [
         {
-            "files": "*.test.ts",
-            "rules": {
-                "import/no-extraneous-dependencies": ["off"],
-                "no-unused-expressions": ["off"]
+            "env": {
+                "node": true
+            },
+            "files": [
+                ".eslintrc.{js,cjs}"
+            ],
+            "parserOptions": {
+                "sourceType": "script"
             }
         }
     ],
-
-    "ignorePatterns": [
-        "lib",
-        "docker"
-    ],
-
-    "settings": {
-        "import/resolver": {
-            "node": {
-                "extensions": [
-                    ".ts",
-                    ".js",
-                    ".json"
-                ]
-            }
-        }
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
     }
 }
