@@ -65,7 +65,7 @@ jobs:
 
       - run: npm ci
       - name: Run import script
-        run: npm run import
+        run: npm run db:import
         env:
           DB_HOST: mariadb
           DB_USER: user
