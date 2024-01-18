@@ -1,6 +1,8 @@
 FROM node:21.6.0-alpine3.19 AS build
 
-WORKDIR /usr/src/app
+COPY . /app
+
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -12,14 +14,17 @@ FROM node:21.6.0-alpine3.19 as api
 
 LABEL org.opencontainers.image.source=https://github.com/alexispet/final-test-AcesTV
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY --from=build /usr/src/app .
+COPY --from=build /app/database ./database
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/package.json .
+COPY --from=build /app/app.js .
 
 EXPOSE 3000
 
-COPY docker/api/docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+COPY docker/api/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint"]
 CMD [ "npm", "run", "start" ]

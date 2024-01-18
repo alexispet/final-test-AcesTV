@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "test": "mocha tests/**/*.test.js --exit",
-    "db:import": "node database/init-db.js"
+    "db:import": "node database/init-db.js",
+    "lint": "eslint . --ext .js"
   },
   "type": "module",
   "author": "",

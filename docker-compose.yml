@@ -12,12 +12,13 @@ services:
       - DB_DATABASE=${DB_DATABASE}
       - NODE_ENV=development
     depends_on:
-      - db
+      mariadb:
+        condition: service_healthy
     volumes:
-      - ".:/usr/src/app"
+      - ".:/app"
     command: ["npm", "run", "start  "]
 
-  db:
+  mariadb:
     image: mariadb:11.2.2
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
@@ -26,7 +27,13 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
     volumes:
-        - mariadb_data:/var/lib/mysql
+        - ./docker/mariadb/data:/var/lib/mysql
+    healthcheck:
+        test: "/usr/bin/mysql --user=${DB_USER} --password=${DB_PASSWORD} --execute \"SHOW DATABASES;\""
+        interval: 2s
+        timeout: 20s
+        retries: 10
+        start_period: 1m
 
   adminer:
     image: adminer
