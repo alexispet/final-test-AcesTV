@@ -1,30 +1,30 @@
 services:
   api:
-    image: ghcr.io/acestv/final-cesi-api:latest
+    build:
+      context: .
+      target: api
     ports:
       - "3000:3000"
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DATABASE: ${DB_DATABASE}
-      NODE_ENV: development
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - NODE_ENV=development
     depends_on:
       - db
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-    command: ["npm", "run", "start"]
+      - ".:/usr/src/app"
+    command: ["npm", "run", "start  "]
 
   db:
     image: mariadb:11.2.2
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: yes
-      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_HOST: ${DB_HOST}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "3306:3306"
+      MYSQL_DATABASE: ${DB_DATABASE}
     volumes:
         - mariadb_data:/var/lib/mysql
 
@@ -32,7 +32,4 @@ services:
     image: adminer
     ports:
       - 8080:8080
-
-volumes:
-    mariadb_data:
 
