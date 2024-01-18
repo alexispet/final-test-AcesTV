@@ -3,3 +3,4 @@ node_modules
 docker/mariadb/data
 docker/mysql/data
 .env
+.eslintrc
