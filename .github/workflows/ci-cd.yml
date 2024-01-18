@@ -155,7 +155,8 @@ jobs:
 
   deploy-production:
     needs: [build-and-push-image]
-    if: github.ref_type == 'tag'
+    #TODO : change to ref_type == 'tag'
+    if: github.ref_name == 'main'
     environment:
         name: production
         url: https://18.207.227.134:80
