@@ -97,7 +97,7 @@ jobs:
 #          labels: ${{ steps.meta.outputs.labels }}
 
   build-and-push-image:
-    needs: [dependency-audit]
+    needs: [dependency-audit, eslint]
     runs-on: ubuntu-latest
     if: github.ref_name == 'main'
     permissions:
