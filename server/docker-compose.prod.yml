@@ -5,9 +5,8 @@ services:
     image: ghcr.io/alexispet/final-test-acestv/api:latest
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "traefik.enable=true"
-      - "traefik.http.routers.app-prod.rule=Host(`ec2-54-210-166-197.compute-1.amazonaws.com`)"
-      - "traefik.http.routers.app-prod.entrypoints=web"
+    ports:
+      - "80:3000"
     environment:
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
