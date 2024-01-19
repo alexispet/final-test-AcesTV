@@ -2,8 +2,10 @@
 
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/OlYrOqbl)
 
-Production URL: __________  
-Development URL: __________
+## BREANT NICOLAS
+
+Production URL: ec2-44-211-37-214.compute-1.amazonaws.com 
+Development URL: 44.211.37.214
 
 ## Description
 This is the official API for the Y Social Network. 

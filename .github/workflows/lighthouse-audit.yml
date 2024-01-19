@@ -2,7 +2,7 @@ name: Lighthouse Audit
 
 on:
   schedule:
-    - cron: '11 13 * * *' # Exécute le workflow tous les jours à minuit UTC
+    - cron: '5 14 * * *' # Exécute le workflow tous les jours à minuit UTC
 
 jobs:
   lighthouse:
@@ -22,6 +22,6 @@ jobs:
 
 
       - name: Run Lighthouse Audit
-        run: lhci autorun --collect.url=http://ec2-54-210-166-197.compute-1.amazonaws.com/
+        run: lhci autorun --collect.url=http://ec2-44-211-37-214.compute-1.amazonaws.com/
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}

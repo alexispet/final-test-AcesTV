@@ -18,6 +18,8 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./traefik/traefik.yml:/traefik.yml"
       - "./traefik/certs:/certs"
+    networks:
+      - web
 
   # Watchtower
   watchtower:
@@ -27,6 +29,6 @@ services:
     command: --interval 30 --label-enable
 
 networks:
-  default:
-    external:
-      name: web
+  web:
+    external: true
+    name: web
