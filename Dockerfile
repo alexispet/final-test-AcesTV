@@ -1,4 +1,4 @@
-FROM node:21.6.0-alpine3.19 AS build
+FROM node:21.5.0-alpine3.19 AS build
 
 COPY . /app
 
@@ -8,9 +8,7 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
-
-FROM node:21.6.0-alpine3.19 as api
+FROM node:21.5.0-alpine3.19 as api
 
 LABEL org.opencontainers.image.source=https://github.com/alexispet/final-test-AcesTV
 
@@ -23,7 +21,7 @@ COPY --from=build /app/app.js .
 
 EXPOSE 3000
 
-COPY docker/api/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY /docker/api/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
