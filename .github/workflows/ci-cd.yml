@@ -126,7 +126,7 @@ jobs:
     if: github.ref_name == 'main'
     environment:
         name: production
-        url: https://18.207.227.134:80
+        url: https://52.91.94.163
     runs-on: ubuntu-latest
     permissions:
       contents: read
