@@ -139,23 +139,23 @@ jobs:
             key: ${{ secrets.SSH_KEY }}
             port: ${{ secrets.SSH_PORT }}
             script: cd prod && sudo docker compose -f docker-compose.prod.yml up --pull always -d
-#
-#  deploy-development:
-#    needs: [ build-docker ]
-#    if: github.ref_name == 'develop'
-#    environment:
-#      name: development
-#      url: https://35.170.192.9:3000
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
-#      packages: write
-#    steps:
-#      - name: Deploy to server
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USER }}
-#          key: ${{ secrets.SSH_KEY }}
-#          port: ${{ secrets.SSH_PORT }}
-#          script: cd dev && sudo docker compose -f docker-compose.dev.yml up --pull always -d
+
+  deploy-development:
+    needs: [ build-docker ]
+    if: github.ref_name == 'develop'
+    environment:
+      name: development
+      url: https://35.170.192.9:3000
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: cd dev && sudo docker compose -f docker-compose.dev.yml up --pull always -d
