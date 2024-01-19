@@ -2,7 +2,7 @@ name: Lighthouse Audit
 
 on:
   schedule:
-    - cron: '45 12 * * *' # Exécute le workflow tous les jours à minuit UTC
+    - cron: '11 13 * * *' # Exécute le workflow tous les jours à minuit UTC
 
 jobs:
   lighthouse:
@@ -16,8 +16,10 @@ jobs:
         with:
           node-version: '21.5.0'
 
+
       - name: Install Lighthouse
-        run: npm install -g lighthouse
+        run: npm install -g @lhci/cli@0.7.x
+
 
       - name: Run Lighthouse Audit
         run: lhci autorun --collect.url=http://ec2-54-210-166-197.compute-1.amazonaws.com/
