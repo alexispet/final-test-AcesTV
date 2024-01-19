@@ -92,7 +92,7 @@ jobs:
   build-and-push-image:
     needs: [dependency-audit, eslint, tests]
     runs-on: ubuntu-latest
-    if: github.ref_name == 'main'
+    if: github.ref_name == 'main' || github.ref_name == 'develop'
     permissions:
       contents: read
       packages: write
